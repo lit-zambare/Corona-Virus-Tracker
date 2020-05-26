@@ -1,0 +1,38 @@
+ .background_map{
+    width:100vw;
+ 	  margin-top: 10px;
+ 	  background-color: #1f2125;
+ }
+
+ .ptag{
+   margin:0px;
+ }
+
+.map{
+      width:100%;
+}
+
+  svg {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .background_map{
+        margin-top: 10px 0;
+        padding-top: 30px;
+         background-color: #1f2125;
+         width:100vw;
+         overflow:hidden;
+    }
+
+    .ptag{
+      margin:0px;
+      font-size: 10px;
+      line-height: 1em;
+    }
+    
+     .map{
+          width:100%;
+    }
+  }

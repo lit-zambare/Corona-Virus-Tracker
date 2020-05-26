@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height:auto;
+  margin: 20px;
+}
+
+.left_div{
+  width: 50%;
+  height:50%;
+}
+
+.right_div{
+  width: 50%;
+  height:50%;
+}
+
+@media only screen and (max-width: 770px) {
+  .container {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height:auto;
+    margin-top: 10px;
+  }
+
+  .left_div{
+    width: 100vw;
+    height:auto;
+  }
+  
+  .right_div{
+    width: 100vw;
+    height:auto;
+  }
+}

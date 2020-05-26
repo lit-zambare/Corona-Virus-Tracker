@@ -1,0 +1,74 @@
+.root {
+  margin: 0;
+  padding:0;
+  width: 100vw;
+  height: 600px;
+  display: block;
+  text-align: center;
+}
+
+.typist {
+  padding: 10px 0;
+  font-size: 20px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 500;
+  color:rgb(0,255,0);
+  background-color: black;
+}
+
+.ptag{
+    margin:0;
+    font-size: 12px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.total {
+  color:rgba(0,0,255,0.5);
+}
+
+.active{
+  color:rgba(255,0,0,0.4);
+}
+
+.recovered{
+  color:rgba(0,255,0,0.5);
+}
+
+.deaths{
+  color:red;
+}
+
+.marker_btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: unset;
+}
+
+.marker_btn img {
+  width: 20px;
+  height: 16px;
+}
+
+@media only screen and (max-width: 768px)
+{
+  .root{
+    width:100vw;
+    height:100vh;
+  }
+
+  .marker_btn img {
+    width: 15px;
+    height: 12px;
+}
+
+.typist {
+  font-size: 16 px;
+
+}
+}
+

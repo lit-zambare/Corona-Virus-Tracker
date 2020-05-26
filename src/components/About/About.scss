@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css?family=Aclonica");
+@import url("https://fonts.googleapis.com/css?family=Dosis");
+@import url("https://fonts.googleapis.com/css?family=Sunflower:300");
+@import url('https://fonts.googleapis.com/css?family=Montserrat:200,300i,400,500,600');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+
+.AboutContainer{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width:100vw;
+    height: 90vh;
+}
+
+.Image{
+    width:20px;
+    height:20px;
+}
+
+.social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    font-size: 22px;
+    background-color: white;
+
+    a {
+      color: #2D1F28;
+      text-decoration: none;
+      margin: 10px;
+    }
+    
+    &:hover {
+      a {
+        opacity: .5;
+        transition: .5s;
+        
+        &:hover {
+          opacity: 1;
+          transition: .5s;
+        }
+      }
+    }
+}
+
+.typist {
+  margin: 10px 0;
+  font-size: 15px;
+  font-weight: 500;
+  color:rgba(0,0,255,0.65);
+  @media only screen and (max-width700px){
+    font-size: 10px;
+  }
+}
+  
+
+@keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+@-webkit-keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+@-moz-keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+@-ms-keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+@keyframes move-clouds-back {
+    from {background-position:0 0;}
+    to {background-position:10000px 0;}
+}
+@-webkit-keyframes move-clouds-back {
+    from {background-position:0 0;}
+    to {background-position:10000px 0;}
+}
+@-moz-keyframes move-clouds-back {
+    from {background-position:0 0;}
+    to {background-position:10000px 0;}
+}
+@-ms-keyframes move-clouds-back {
+    from {background-position: 0;}
+    to {background-position:10000px 0;}
+}
+.stars, .twinkling, .clouds {
+
+  width:100%;
+  height:100%;
+  display:block;
+  overflow: hidden;
+}
+.stars {
+  background:#000 url(icons/stars.png) repeat top center;
+  z-index:0;
+}
+.twinkling{
+  background:transparent url(icons/twinkling.png) repeat top center;
+  z-index:1;
+  -moz-animation:move-twink-back 200s linear infinite;
+  -ms-animation:move-twink-back 200s linear infinite;
+  -o-animation:move-twink-back 200s linear infinite;
+  -webkit-animation:move-twink-back 200s linear infinite;
+  animation:move-twink-back 200s linear infinite;
+}
+.clouds{
+    background:transparent url(icons/clouds.png) repeat top center;
+    z-index:3;
+  -moz-animation:move-clouds-back 200s linear infinite;
+  -ms-animation:move-clouds-back 200s linear infinite;
+  -o-animation:move-clouds-back 200s linear infinite;
+  -webkit-animation:move-clouds-back 200s linear infinite;
+  animation:move-clouds-back 200s linear infinite;
+}
+
+@media only screen and (max-width:700px)
+{    
+  .AboutContainer{
+    height: 95vh;
+}
+
+    .stars, .twinkling, .clouds {
+        top:40px;
+
+      }
+}

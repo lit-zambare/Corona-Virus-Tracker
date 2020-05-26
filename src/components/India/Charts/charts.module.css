@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  height:auto;
+}
+
+.left_charts_div{
+  width: 50%;
+  height:50%;
+}
+
+@media only screen and (max-width: 770px) {
+  .container {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height:auto;
+    margin-top: 10px;
+  }
+
+  .line{
+    height:250px;
+  }
+
+  .left_charts_div{
+    width: 100vw;
+    height:auto;
+  }
+}

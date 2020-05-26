@@ -1,0 +1,61 @@
+/* Elements */
+li {
+  padding: 4px 0;
+}
+
+button {
+  font-size: 20px;
+  margin-right: 30px;
+  color: white;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: white;
+  float: right;
+}
+
+/* Class */
+.navBar {
+  width: 100%;
+  height: fit-content;
+  background-color: rgba(0,0,255,0.5);
+  color: white;
+  padding: 2px;
+}
+
+.links {
+height: 0;
+overflow: hidden;
+list-style-type: none;
+font-weight: bold;
+}
+
+.show_nav {
+  height: 100px;
+}
+
+/* Media screen size */
+@media screen and (min-width: 770px) {
+
+  .navBar {
+    width: 100%;
+    height: fit-content;
+    background-color: rgba(0,0,255,0.5);
+    color: white;
+    padding: 1px;
+  }
+
+  button {
+      display: none;
+  }
+
+  .links {
+      height: auto;
+      display: flex;
+      justify-content: flex-end;
+  }
+
+  li {
+      padding: 0 20px;
+  }
+}
