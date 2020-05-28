@@ -10,10 +10,22 @@ import { useTheme,makeStyles } from "@material-ui/styles";
 
 const Cards = ({ data }) => {
 
-  if (!data.total_cases) 
-  {
-    return(<h3>Loading...</h3>);
-  }	
+	console.log("data is : ",data);
+
+	if(data.total_cases === -1)
+	{	
+		return(<div style={{textAlign:"center",margin:25}}>
+			<Typography color="secondary">Alas! Looks like the server of api is down...</Typography>
+			<Typography color="error">Can't fetch global data. This will get fixed ASAP.</Typography>
+			<Typography color="error">Please come back after minutes and check again...</Typography>
+			<Typography color="primary"><strong>Sorry for the inconvenience</strong></Typography>
+		</div>);
+	}
+
+	if(Object.keys(data).length === 0 && data.constructor === Object)
+	{
+		return(<h3>Loading...</h3>);
+	}
 
   return(
     <div className={styles.container}>
@@ -70,7 +82,7 @@ const Cards = ({ data }) => {
 
 			<Grid item>
 			<Paper elevation={3} className={cx(styles.card,styles.rank)}>
-				<Typography style={{  lineHeight: '1em',    color: 'rgba(0, 0, 0, 0.54)'}} noWrap={data.total_affected_countries ? false : true}  variant={data.total_affected_countries ? "subtitle1" : "data1"}>
+				<Typography style={{  lineHeight: '1em',    color: 'rgba(0, 0, 0, 0.54)'}} noWrap={data.total_affected_countries ? false : true}  variant={data.total_affected_countries ? "subtitle1" : "body2"}>
 				{data.total_affected_countries ? "Total Affected Countries" : "Total Danger Rank"}
 				</Typography>
 				<Typography variant="h5" component="h2" align="center">

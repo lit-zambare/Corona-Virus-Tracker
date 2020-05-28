@@ -41,6 +41,7 @@ const Charts = ({state,TimeSeries}) => {
     fetchMyAPI();
   }, []);
 
+
     const lineChart = (
     state.state ? (
       <Line
@@ -174,33 +175,18 @@ const Charts = ({state,TimeSeries}) => {
 		data={{
           labels: TimeSeries.map((item) => item.date.substr(0,6)),
           datasets: [{
-            data: TimeSeries.map((item,index) => {
-              if(index === 0) prev=0;
-              cur = Number(item.totalconfirmed);
-              prev = prev + cur;
-              return(prev);
-            }),
+            data: TimeSeries.map((item,index) => Number(item.totalconfirmed)),
             label: 'Total',
             borderColor: '#3333ff',
             fill: true,
           }, {
-            data: TimeSeries.map((item,index) => {
-              if(index === 0) prev=0;
-              cur = Number(item.totalrecovered);
-              prev = prev + cur;
-              return(prev);
-            }),
+            data: TimeSeries.map((item,index) => Number(item.totaldeceased)),
             label: 'Deaths',
             borderColor: 'red',
             backgroundColor: 'rgba(255, 0, 0, 0.5)',
             fill: true,
           },{
-            data: TimeSeries.map((item,index) => {
-              if(index === 0) prev=0;
-              cur = Number(item.totaldeceased);
-              prev += cur;
-              return(prev);
-            }),
+            data: TimeSeries.map((item,index) => Number(item.totalrecovered)),
             label: 'Recovered',
             borderColor: 'green',
             backgroundColor: 'rgba(0, 255, 0, 0.5)',

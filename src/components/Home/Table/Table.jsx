@@ -12,7 +12,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 
 const useStyles = makeStyles(theme => ({
-	root: {
+  root: {
     width:'100vw',
     'overflow-x' : 'visible',
     display:"flex",
@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: 'rgba(255,0,0,0.5)'
     },
     cell_recovered: {
-		 minWidth: 1,
+     minWidth: 1,
         backgroundColor: 'rgba(0,255,0,0.5)'
       },
 
@@ -100,7 +100,7 @@ const StyledTableRow = withStyles((theme) => ({
       backgroundColor: theme.palette.action.hover,
     },
   },
-}))(TableRow);	
+}))(TableRow);  
 
 const SortingFunction = (data) =>
 {
@@ -108,11 +108,15 @@ const SortingFunction = (data) =>
   const [order,setOrder] = useState(true);
     const sortedData = React.useMemo(() =>
     { 
-      const items = [...data]
-      if(order===true)
-        items.sort((a,b) => b[sortBy]-a[sortBy]);
-      else if(order===false)
-        items.sort((a,b) => a[sortBy]-b[sortBy]);
+      let items=[];
+      if(data)
+      {
+        items = [...data]
+        if(order===true)
+          items.sort((a,b) => b[sortBy]-a[sortBy]);
+        else if(order===false)
+          items.sort((a,b) => a[sortBy]-b[sortBy]);
+      }
       return items;
   },[sortBy,data,order]);
   
@@ -169,12 +173,12 @@ export default function MyTable(props)
             <StyledTableRow key={row.ourid}>
               <StyledTableCell component="th" scope="row">{row.title}</StyledTableCell>
               <StyledTableCell className={classes.cell_total} align="right"><p className={classes.ptag}>{row.total_cases.toLocaleString()}</p>
-              																<p className={classes.ptag2}>+{row.total_new_cases_today.toLocaleString()}</p>
+                                              <p className={classes.ptag2}>+{row.total_new_cases_today.toLocaleString()}</p>
               </StyledTableCell>
               <StyledTableCell align="right"><p className={classes.ptag}>{row.total_active_cases.toLocaleString()}</p></StyledTableCell>
               <StyledTableCell className={classes.cell_recovered} align="right"><p  className={classes.ptag}>{row.total_recovered.toLocaleString()}</p></StyledTableCell>
               <StyledTableCell  align="right"><p className={classes.ptag}>{row.total_deaths.toLocaleString()}</p>
-											<p className={classes.ptag2}>+{row.total_new_deaths_today.toLocaleString()}</p>
+                      <p className={classes.ptag2}>+{row.total_new_deaths_today.toLocaleString()}</p>
 
               </StyledTableCell>
             </StyledTableRow>
