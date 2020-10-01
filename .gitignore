@@ -1,0 +1,20 @@
+# Node modules
+node_modules
+
+*.log
+
+# Editor / IDE files
+/.idea
+/.idea/*
+.vscode
+
+# Output of 'npm pack'
+*.tgz
+
+# dotenv environment variables file
+.env
+.env.test
+
+package-lock.json
+
+.DS_Store
