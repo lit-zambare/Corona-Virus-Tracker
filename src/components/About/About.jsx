@@ -102,7 +102,7 @@ const ProfileCard = () => {
         <Button href="https://github.com/Litesh97/Corona-Virus-Tracker.git" size="small" color="primary">
           Source Code
         </Button>
-        <Button href="https://thevirustracker.com/api" size="small" color="primary">
+        <Button href="https://api.covid19api.com/" size="small" color="primary">
           API-1
         </Button>
         <Button href="https://api.covid19india.org" size="small" color="primary">

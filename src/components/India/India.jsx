@@ -16,6 +16,10 @@ const India = () => {
         const fetchAPI = async() =>
         {        
             const {StatesData,IndiaData,DistrictData,TimeSeries} = await fetchDataIndia();
+            let deltaCases = TimeSeries[TimeSeries.length - 1]
+            // IndiaData.deltaconfirmed = deltaCases.dailyconfirmed
+            // IndiaData.deltadeaths = deltaCases.dailydeceased
+            // IndiaData.deltarecovered = deltaCases.dailyrecovered
             setIndiaData(IndiaData);
             setState(IndiaData);
             setStatesData(StatesData);

@@ -72,8 +72,8 @@ const Charts = ({state,TimeSeries}) => {
               return(prev);
             }),
             label: 'Deaths',
-            borderColor: 'red',
-            backgroundColor: 'rgba(255, 0, 0, 0.5)',
+            borderColor: 'green',
+            backgroundColor: 'rgba(0, 255, 0, 0.5)',
             fill: true,
           },{
             data: Deceased.map((item,index) => {
@@ -83,8 +83,8 @@ const Charts = ({state,TimeSeries}) => {
               return(prev);
             }),
             label: 'Recovered',
-            borderColor: 'green',
-            backgroundColor: 'rgba(0, 255, 0, 0.5)',
+            borderColor: 'red',
+            backgroundColor: 'rgba(255, 0, 0, 0.5)',
             fill: true,
           }
           ],

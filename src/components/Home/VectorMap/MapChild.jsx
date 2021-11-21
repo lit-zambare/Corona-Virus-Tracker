@@ -13,40 +13,40 @@ const geoUrl =
 "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries-sans-antarctica.json";
 const MapChild = ({ setTooltipContent , AllCountriesData }) =>
 {	
-  const APIdata = Object.assign({}, ...AllCountriesData.map(item => ({ [item.code]: { 
-    "name" : item.title,
-    "total" : item.total_cases,
-    "active" : item.total_active_cases,
-    "recovered" : item.total_recovered,
-    "deaths" : item.total_deaths }})));
+  const APIdata = Object.assign({}, ...AllCountriesData.map(item => ({ [item.CountryCode]: { 
+    "name" : item.Country,
+    "total" : item.TotalConfirmed,
+    "active" : item.TotalConfirmed-(item.TotalRecovered+item.TotalDeaths),
+    "recovered" : item.TotalRecovered,
+    "deaths" : item.TotalDeaths }})));
 
-  function getcolor(active)
+  function getcolor(total)
   {
-    if(active > 1000000)
+    if(total > 30000000)
       return ("#FF0000");
-    else if(active > 750000)
+    else if(total > 10000000)
       return("#FF1010");
-    else if(active > 500000)
+    else if(total > 7000000)
       return("#FF2020");
-    else if(active > 250000)
+    else if(total > 3000000)
      return("#FF3030)");
-    else if(active > 125000)
+    else if(total > 1000000)
       return("#FF4040");
-    else if(active > 100000)
+    else if(total > 500000)
       return("#FF5050");
-    else if(active > 50000)
+    else if(total > 300000)
       return( "#FF6A6A");
-    else if(active > 25000)
+    else if(total > 200000)
       return ("#FF8888");
-    else if(active > 10000)
+    else if(total > 100000)
      return( "#FF9090");
-    else if(active > 1000)
+    else if(total > 50000)
       return("#FFB1B1");
-    else if(active > 500)
+    else if(total > 10000)
       return("#FFC1C1");
-    else if(active > 100)
+    else if(total > 5000)
       return("#FFCDCD");
-    else if(active > 1)
+    else if(total > 1000)
       return("#FFDADA");
     else
         return ("white");
@@ -77,7 +77,9 @@ const MapChild = ({ setTooltipContent , AllCountriesData }) =>
                     }
                     else
                     {
-                      setTooltipContent(<p>{geo.properties.name}</p>);
+                      setTooltipContent(<div>
+                                          <p>{geo.properties.name} (Corona-Free)</p>
+                                        </div>);
                     }
                   }}
                   onMouseLeave={() => {
@@ -86,7 +88,7 @@ const MapChild = ({ setTooltipContent , AllCountriesData }) =>
                   style={{
                     default: {
                       // eslint-disable-next-line no-restricted-globals
-                      fill: APIdata[geo.properties["Alpha-2"]] ? getcolor(APIdata[geo.properties["Alpha-2"]].active) : "white",
+                      fill: APIdata[geo.properties["Alpha-2"]] ? getcolor(APIdata[geo.properties["Alpha-2"]].total) : "white",
                       stroke: "#1f2125",
                       'strokeWidth': "0.3px",
                       outline:"none",

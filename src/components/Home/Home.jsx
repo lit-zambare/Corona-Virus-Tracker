@@ -8,20 +8,30 @@ import { fetchData } from '../../api';
 class Home extends React.Component {
   state = {
       data: {},
+      GlobalData: {},
       country : "",
       AllCountriesData : []
   }
   
  async componentDidMount() {
-    const data  = await fetchData();
-    this.setState({ data });
-    const AllCountriesData = await fetchData("FETCH-ALL");
-    this.setState({ AllCountriesData });
+    const { Global,Countries }  = await fetchData();
+    this.setState({ data : Global,
+                    GlobalData : Global,
+                    AllCountriesData: Countries });
   }
 
   handleCountryChange = async (country) => {
-    const data = await fetchData(country);
-    this.setState({ data, country: country });
+    //const data = await fetchData(country);
+    this.setState({ country });
+    if(country === "")
+    {
+      this.setState({ data: this.state.GlobalData });
+    }
+    else
+    { 
+        const result = this.state.AllCountriesData.find( item => item.Slug === country )
+        this.setState({ data : result });
+    }
   }
   
   render()
@@ -32,11 +42,11 @@ class Home extends React.Component {
           <div className={styles.container}>
             <img className={styles.image} src={image} alt="COVID-19" />
             <TypeWriter />
-            <Cards data={data}/>
-            <CountryPicker handleCountryChange={this.handleCountryChange}/>
+            <Cards data={data} total={AllCountriesData.length}/>
+            <CountryPicker handleCountryChange={this.handleCountryChange} AllCountriesData={AllCountriesData}/>
             {country ? <Chart details={data} country={country}/> : 
                         <VectorMap AllCountriesData={AllCountriesData}/> 
-                        }
+            }
             <MyTable AllCountriesData={AllCountriesData}/>
           </div>
         </div>

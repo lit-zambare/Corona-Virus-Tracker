@@ -3,7 +3,7 @@ import styles from './GlobalMap.module.css';
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import * as countries1 from './countries.json';
 import { makeStyles } from '@material-ui/core/styles';
-import { fetchData } from '../../api';
+import { fetchForMap } from '../../api';
 import Typist from "react-typist";
 
 const GlobalMap = (props) => {
@@ -37,7 +37,7 @@ const GlobalMap = (props) => {
 
   useEffect(()=>{
     const fetchAPI = async() => {
-      setAllCountriesData(await fetchData("FETCH-ALL"));
+      setAllCountriesData(await fetchForMap());
     }
     fetchAPI();
   },[]);
@@ -48,15 +48,14 @@ const GlobalMap = (props) => {
 
       {count ? (
         <Typist className={styles.typist} avgTypingDelay={50} onTypingDone={() => setCount(0)}>
-          <span>You can Zoom </span>
+          {window.screen.width > 768 ? <span>You can Zoom </span> : <span>Use two fingers to Zoom </span>}
           <Typist.Backspace count={5} delay={800} />
-          <span>Pan </span>
-          <Typist.Backspace count={4} delay={800} />
           <span>Scroll </span>
-          <Typist.Backspace count={20} delay={800} />
+          <Typist.Backspace count={7} delay={800} />
+          <span>Pan </span>
+          <Typist.Backspace count={23} delay={800} />
           <span>Click on any flag for more details</span>
-          <Typist.Backspace count={34} delay={500} />
-          <span></span>
+          <Typist.Delay ms={800} />
         </Typist>
       ) : (
         ""
@@ -70,11 +69,11 @@ const GlobalMap = (props) => {
           setViewport(viewport);
         }}
       >
-        {AllCountriesData ? AllCountriesData.map(country => (
-          Object.keys(countries).includes(country.code) ? <Marker
-            key={country.ourid}
-            latitude={countries[country.code].latitude}
-            longitude={countries[country.code].longitude}
+        {AllCountriesData !== undefined ? AllCountriesData.map(country => (
+          Object.keys(countries).includes(country.CountryCode) ? <Marker
+            key={country.CountryCode}
+            latitude={countries[country.CountryCode].latitude}
+            longitude={countries[country.CountryCode].longitude}
           >
             <button
               className={styles.marker_btn}
@@ -83,25 +82,25 @@ const GlobalMap = (props) => {
                 selectedCountry !== country ? setselectedCountry(country) : setselectedCountry({});
               }}
             >
-              <img src={require(`./Flags/${country.code.toLowerCase()}.png`)} alt={`${country.title}`} />
+              <img src={require(`./Flags/${country.CountryCode.toLowerCase()}.png`)} alt={`${country.Country}`} />
             </button>
           </Marker> : null
         )) : null} 
 
-        {countries[selectedCountry.code] ? (
+        {countries[selectedCountry.CountryCode] ? (
           <Popup
-            latitude={countries[selectedCountry.code].latitude}
-            longitude={countries[selectedCountry.code].longitude}
+            latitude={countries[selectedCountry.CountryCode].latitude}
+            longitude={countries[selectedCountry.CountryCode].longitude}
             onClose={() => {
               setselectedCountry({});
             }}
           >
             <div>
-              <p className={styles.ptag}>{selectedCountry.title}</p>
-              <p className={styles.ptag}>Total : {selectedCountry.total_cases.toLocaleString()}</p>
-              <p className={styles.ptag}>Active : {selectedCountry.total_active_cases.toLocaleString()}</p>
-              <p className={styles.ptag}>Recoverd : {selectedCountry.total_recovered.toLocaleString()}</p>
-  			      <p className={styles.ptag}>Deaths : {selectedCountry.total_deaths.toLocaleString()}</p>
+              <p className={styles.ptag}>{selectedCountry.Country}</p>
+              <p className={styles.ptag}>Total : {selectedCountry.TotalConfirmed.toLocaleString()}</p>
+              <p className={styles.ptag}>Active : {(selectedCountry.TotalConfirmed-(selectedCountry.TotalRecovered+selectedCountry.TotalDeaths)).toLocaleString() }</p>
+              <p className={styles.ptag}>Recoverd : {selectedCountry.TotalRecovered.toLocaleString()}</p>
+  			      <p className={styles.ptag}>Deaths : {selectedCountry.TotalDeaths.toLocaleString()}</p>
             </div>
           </Popup>
         ) : null}

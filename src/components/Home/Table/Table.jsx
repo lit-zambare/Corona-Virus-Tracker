@@ -12,7 +12,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 
 const useStyles = makeStyles(theme => ({
-  root: {
+	root: {
     width:'100vw',
     'overflow-x' : 'visible',
     display:"flex",
@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: 'rgba(255,0,0,0.5)'
     },
     cell_recovered: {
-     minWidth: 1,
+		 minWidth: 1,
         backgroundColor: 'rgba(0,255,0,0.5)'
       },
 
@@ -100,11 +100,11 @@ const StyledTableRow = withStyles((theme) => ({
       backgroundColor: theme.palette.action.hover,
     },
   },
-}))(TableRow);  
+}))(TableRow);	
 
 const SortingFunction = (data) =>
 {
-  const [sortBy,setsortBy] = useState("total_cases");
+  const [sortBy,setsortBy] = useState("TotalConfirmed");
   const [order,setOrder] = useState(true);
     const sortedData = React.useMemo(() =>
     { 
@@ -147,38 +147,40 @@ export default function MyTable(props)
         <TableHead>
           <TableRow>
             <StyledTableCell>Country</StyledTableCell>
-            <StyledTableCell onClick={() => requestSort('total_cases',order)} align="right">Total
-              {order && sortBy==="total_cases" ? <ArrowDropDownIcon fontSize="small"></ArrowDropDownIcon> : null}
-              {!order && sortBy==="total_cases" ? <ArrowDropUpIcon fontSize="small"></ArrowDropUpIcon> : null}
+            <StyledTableCell onClick={() => requestSort('TotalConfirmed',order)} align="right">Total
+              {order  ? <ArrowDropDownIcon fontSize="small"></ArrowDropDownIcon> : null}
+              {!order ? <ArrowDropUpIcon fontSize="small"></ArrowDropUpIcon> : null}
             </StyledTableCell>
 
-            <StyledTableCell onClick={() => requestSort('total_active_cases',order)} align="right">Active
-              {order && sortBy==="total_active_cases" ? <ArrowDropDownIcon fontSize="small"></ArrowDropDownIcon> : null}
-              {!order && sortBy==="total_active_cases" ? <ArrowDropUpIcon fontSize="small"></ArrowDropUpIcon> : null}
+            <StyledTableCell align="right">Active
             </StyledTableCell>
 
-            <StyledTableCell onClick={() => requestSort('total_recovered',order)} align="right">Rcvred
-              {order && sortBy==="total_recovered" ? <ArrowDropDownIcon fontSize="small"></ArrowDropDownIcon> : null}
-              {!order && sortBy==="total_recovered" ? <ArrowDropUpIcon fontSize="small"></ArrowDropUpIcon> : null}
+            <StyledTableCell onClick={() => requestSort('TotalRecovered',order)} align="right">Rcvred
+              {order  ? <ArrowDropDownIcon fontSize="small"></ArrowDropDownIcon> : null}
+              {!order  ? <ArrowDropUpIcon fontSize="small"></ArrowDropUpIcon> : null}
             </StyledTableCell>
 
-            <StyledTableCell onClick={() => requestSort('total_deaths',order)} align="right">Deaths
-              {order && sortBy==="total_deaths" ? <ArrowDropDownIcon fontSize="small"></ArrowDropDownIcon> : null }
-              {!order && sortBy==="total_deaths" ? <ArrowDropUpIcon fontSize="small"></ArrowDropUpIcon> : null}
+            <StyledTableCell onClick={() => requestSort('TotalDeaths',order)} align="right">Deaths
+              {order ? <ArrowDropDownIcon fontSize="small"></ArrowDropDownIcon> : null }
+              {!order ? <ArrowDropUpIcon fontSize="small"></ArrowDropUpIcon> : null}
             </StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {sortedData.map((row) => (
             <StyledTableRow key={row.ourid}>
-              <StyledTableCell component="th" scope="row">{row.title}</StyledTableCell>
-              <StyledTableCell className={classes.cell_total} align="right"><p className={classes.ptag}>{row.total_cases.toLocaleString()}</p>
-                                              <p className={classes.ptag2}>+{row.total_new_cases_today.toLocaleString()}</p>
+              <StyledTableCell component="th" scope="row">{row.Country}</StyledTableCell>
+              <StyledTableCell className={classes.cell_total} align="right"><p className={classes.ptag}>{row.TotalConfirmed.toLocaleString()}</p>
+              																<p className={classes.ptag2}>+{row.NewConfirmed.toLocaleString()}</p>
               </StyledTableCell>
-              <StyledTableCell align="right"><p className={classes.ptag}>{row.total_active_cases.toLocaleString()}</p></StyledTableCell>
-              <StyledTableCell className={classes.cell_recovered} align="right"><p  className={classes.ptag}>{row.total_recovered.toLocaleString()}</p></StyledTableCell>
-              <StyledTableCell  align="right"><p className={classes.ptag}>{row.total_deaths.toLocaleString()}</p>
-                      <p className={classes.ptag2}>+{row.total_new_deaths_today.toLocaleString()}</p>
+              <StyledTableCell align="right"><p className={classes.ptag}>{
+                (row.TotalConfirmed-(row.TotalRecovered+row.TotalDeaths)).toLocaleString()
+              }</p></StyledTableCell>
+              <StyledTableCell className={classes.cell_recovered} align="right"><p  className={classes.ptag}>{row.TotalRecovered.toLocaleString()}</p>
+                                                                                <p className={classes.ptag2}>+{row.NewRecovered.toLocaleString()}</p>
+              </StyledTableCell>
+              <StyledTableCell  align="right"><p className={classes.ptag}>{row.TotalDeaths.toLocaleString()}</p>
+											<p className={classes.ptag2}>+{row.NewDeaths.toLocaleString()}</p>
 
               </StyledTableCell>
             </StyledTableRow>

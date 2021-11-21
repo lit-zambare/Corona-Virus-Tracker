@@ -4,18 +4,18 @@ import { Line, Bar } from 'react-chartjs-2';
 import styles from './charts.module.css';
 
 const Charts = ({details, country}) => {
-  const [timeline, setTimeline] = useState({});
+  const [timeline, setTimeline] = useState([]);
 
   useEffect(() => {
     const fetchMyAPI = async (country) => {
       const mytimeline = await fetchTimeline(country);
-      setTimeline(mytimeline[0]);
+      setTimeline(mytimeline);
     };
 
     fetchMyAPI(country);
   }, [country]);
 
-	const arr = Object.values(timeline);
+	// const arr = Object.values(timeline);
     const lineChart = (
     country ? (
       <Line
@@ -23,20 +23,20 @@ const Charts = ({details, country}) => {
       responsive:true,
     }}
 		data={{
-          labels: Object.keys(timeline).map((date) => date.substr(0,4)),
+          labels: timeline.map((item) => item.Date.substr(0,10)),
           datasets: [{
-            data: arr.map((data) => data.total_cases),
+            data: timeline.map((data) => data.Confirmed),
             label: 'Total',
             borderColor: '#3333ff',
             fill: true,
           }, {
-            data: arr.map((data) => data.total_deaths),
+            data: timeline.map((data) => data.Deaths),
             label: 'Deaths',
             borderColor: 'red',
             backgroundColor: 'rgba(255, 0, 0, 0.5)',
             fill: true,
           },{
-            data: arr.map((data) => data.total_recoveries),
+            data: timeline.map((data) => data.Recovered),
             label: 'Recovered',
             borderColor: 'green',
             backgroundColor: 'rgba(0, 255, 0, 0.5)',
@@ -57,7 +57,7 @@ const Charts = ({details, country}) => {
             {
               label: 'Cases',
               backgroundColor: ['rgba(0, 0, 255, 0.5)','rgba(255, 0, 255, 0.5)','rgba(0, 255, 0, 0.5)','rgba(255, 0, 0, 0.5)'],
-              data: [details.total_cases,details.total_active_cases,details.total_recovered,details.total_deaths],
+              data: [details.TotalConfirmed,details.TotalConfirmed-(details.TotalRecovered+  details.TotalDeaths),details.TotalRecovered,details.TotalDeaths],
             },
           ],
         }}

@@ -54,7 +54,7 @@ const MapChild =  ({ setTooltipContent , state,StatesData }) =>
 
 
   const getcolor = scaleLinear()
-  .domain([0, 40000]) // Max is based on China
+  .domain([0, 3500000]) // Max is based on China
   .range(["#ffe6e6","#ff1a1a" ])
 
 	return (
